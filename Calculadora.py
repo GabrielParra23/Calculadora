@@ -18,15 +18,12 @@ from flet import (
 class CalculatorApp(UserControl):
     def build(self):
         self.reset()
-        self.resultado = Text(
-            value = "0", 
-            color="white", 
-            size=20)
+        self.resultado = Text(value = "0", color="white", size=20)
         
         return Container(
             padding=20,
             border_radius=border_radius.all(20),
-            bgcolor= ft.colors.BLACK,
+            bgcolor= colors.BLACK,
             width=300,
             content=Column(
                 
@@ -61,7 +58,8 @@ class CalculatorApp(UserControl):
                             ),
                         ]
                     ),
-                    Row(controls=[
+                    Row(
+                        controls=[
                             ElevatedButton(
                                 text="7",
                                 expand=1,
@@ -89,7 +87,8 @@ class CalculatorApp(UserControl):
                             ),
                         ]
                     ),
-                    Row(controls=[
+                    Row(
+                        controls=[
                             ElevatedButton(
                                 text="4",
                                 expand=1,
@@ -117,7 +116,8 @@ class CalculatorApp(UserControl):
                             ),
                         ]
                     ),
-                    Row(controls=[
+                    Row(
+                        controls=[
                             ElevatedButton(
                                 text="1",
                                 expand=1,
@@ -145,7 +145,8 @@ class CalculatorApp(UserControl):
                             ),
                         ]
                     ),
-                    Row(controls=[
+                    Row(
+                        controls=[
                             ElevatedButton(
                                 text="0",
                                 expand=1,
@@ -187,7 +188,7 @@ class CalculatorApp(UserControl):
             
             
          #dando funcionalidade aos numeros   
-        elif data in ("1","2","3","4","5","6","7","8","9",".","0"):
+        elif data in ("1","2","3","4","5","6","7","8","9","0","."):
             if self.resultado.value == "0" or self.nova_operacao == True:
                 self.resultado.value = data
                 self.nova_operacao = False
@@ -200,10 +201,8 @@ class CalculatorApp(UserControl):
         # dando funcionalidade as funções       
         elif data in ("/","*","-","+"):
             self.resultado.value = self.calculo( 
-                self.operacao1, 
-                float(self.resultado.value), 
-                self.operador
-                )
+                self.operacao1, float(self.resultado.value), self.operador
+            )
             #caso a operação 1 não seja 0 ou o resultado seja erro então a operação 1 ira pegar o numero do resultado para ele e transformar a nova operação em verdadeiro para que seja possivel colocar a nova operação;
             self.operador = data 
             if self.resultado.value == "Erro":
@@ -211,7 +210,7 @@ class CalculatorApp(UserControl):
             
             else:
                 self.operacao1 = float(self.resultado.value)
-                self.nova_operacao = True
+            self.nova_operacao = True
                 
         elif data in ("="):
             self.resultado.value = self.calculo(
@@ -219,7 +218,7 @@ class CalculatorApp(UserControl):
                 float(self.resultado.value),
                 self.operador
             )
-            self.reset
+            self.reset()
             
         elif data in ('%'):
             self.resultado.value = float(self.resultado.value) / 100
@@ -234,7 +233,13 @@ class CalculatorApp(UserControl):
                     self.formatar_numero(abs(float(self.resultado.value)))
                 )
         self.update()
-    #operações           
+    #operações
+    def formatar_numero(self, num):
+        if num %1 == 0:
+            return int(num)
+        else:
+            return num
+               
     def calculo(self, operacao1, operacao2, operador):
         if operador == "+":
             return self.formatar_numero (operacao1 + operacao2)
@@ -250,36 +255,18 @@ class CalculatorApp(UserControl):
             else:
                 return self.formatar_numero (operacao1 / operacao2) 
     
-    def formatar_numero(self, num):
-        if num % 1 == 0:
-            return int(num)
-        else:
-            return num
+    
     
     def reset(self):
         self.operador = "+"
         self.operacao1 = 0
         self.nova_operacao = True
-        
             
-        
-                
-            
-            
-         
-                
-        
-    
-   
-            
-      
 
 #1 passo: criar a pagina inicial
 
 def main(pagina: ft.Page):
     pagina.title = "Calculadora"
-    pagina.window_width = 300
-    pagina.window_height = 380
     
     
     calc = CalculatorApp()
