@@ -176,8 +176,7 @@ class CalculatorApp(UserControl):
         )
     #3 passo: dar funcionalidade aos botoes
     
-    # reseta para a segunda operação
-   
+    
    
     
     def botao(self, e):
@@ -235,7 +234,7 @@ class CalculatorApp(UserControl):
                     self.formatar_numero(abs(float(self.resultado.value)))
                 )
         self.update()
-                
+    #operações           
     def calculo(self, operacao1, operacao2, operador):
         if operador == "+":
             return self.formatar_numero (operacao1 + operacao2)
@@ -309,14 +308,7 @@ ft.app(target=main)
 ft.app(target=main)  
     
     
-#Aqui está um detalhamento da expressão:
 
-#n: Este é o número que você deseja testar.
-#%: Este é o operador de módulo, que calcula o restante de uma operação de divisão.
-#1: Este é o divisor e, neste caso, é 1.
-#==: Este é o operador de igualdade, usado para comparar se o resto da divisão é igual a 0.
-#Se a expressão (n % 1 == 0)for avaliada como True, significa que né um número inteiro porque não há resto quando né dividido por 1. Se for avaliado como False, significa que nnão é um número inteiro porque há um resto quando né dividido por 1, indicando que nnão é divisível por 1.        
-        
     
     
         
